@@ -10,6 +10,6 @@ class Calculator
 
     public function calculateTotal(array $products): Total
     {
-
+        return new Total();
     }
 }

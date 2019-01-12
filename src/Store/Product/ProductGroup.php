@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Entity;
+namespace App\Store\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
-/** @ORM\Entity(repositoryClass="App\Repository\ProductGroupRepo") */
+/** @ORM\Entity(repositoryClass="App\Store\Product\ProductGroupRepo") */
 class ProductGroup
 {
     /** @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer") */
@@ -16,7 +16,7 @@ class ProductGroup
 
     /**
      * @var ArrayCollection|Product[]
-     * @ORM\ManyToMany(targetEntity="App\Entity\Product")
+     * @ORM\ManyToMany(targetEntity="App\Store\Product\Product")
      * @ORM\JoinTable(
      *     name="group_product",
      *     joinColumns={@ORM\JoinColumn(name="product_group_id", referencedColumnName="id")},

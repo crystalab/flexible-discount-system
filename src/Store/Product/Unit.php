@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace App\Store\Product;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** @ORM\Entity(repositoryClass="App\Repository\UnitRepo") */
+/** @ORM\Entity(repositoryClass="App\Store\Product\UnitRepo") */
 class Unit
 {
     /** @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer") */

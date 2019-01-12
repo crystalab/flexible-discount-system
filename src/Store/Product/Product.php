@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace App\Store\Product;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** @ORM\Entity(repositoryClass="App\Repository\ProductRepo") */
+/** @ORM\Entity(repositoryClass="App\Store\Product\ProductRepo") */
 class Product
 {
     /** @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer") */
@@ -18,7 +18,7 @@ class Product
 
     /**
      * @var Unit
-     * @ORM\ManyToOne(targetEntity="App\Entity\Unit", fetch="EAGER", cascade={})
+     * @ORM\ManyToOne(targetEntity="App\Store\Product\Unit", fetch="EAGER", cascade={})
      * @ORM\JoinColumn(name="unit_id", referencedColumnName="id")
      */
     private $unit;

@@ -49,4 +49,18 @@ class CalculatorTest extends TestCase
         $this->assertSame(5 * 1.30, $result->originalItems[0]->totalPrice);
         $this->assertSame(2.5 * 1.40, $result->originalItems[1]->totalPrice);
     }
+
+    /** @test */
+    public function calculateShouldReturnFinalItemsSameAsOriginal()
+    {
+        $result = $this->instance->calculateTotal([
+            new Cart\Item($this->pineappleProduct, 5),
+            new Cart\Item($this->tomatoProduct, 2.5),
+        ]);
+
+        $this->assertInternalType("array", $result->finalItems);
+        $this->assertCount(2, $result->finalItems);
+        $this->assertSame($result->originalItems[0], $result->finalItems[0]);
+        $this->assertSame($result->originalItems[1], $result->finalItems[1]);
+    }
 }

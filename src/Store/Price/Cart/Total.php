@@ -7,8 +7,12 @@ class Total
     /** @var CalculatedItem[] */
     public $originalItems;
 
-    public function __construct(array $originalItems)
+    /** @var CalculatedItem[] */
+    public $finalItems;
+
+    public function __construct(array $originalItems, array $finalItems)
     {
         $this->originalItems = $originalItems;
+        $this->finalItems = $finalItems;
     }
 }

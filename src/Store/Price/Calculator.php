@@ -24,6 +24,6 @@ class Calculator
             );
         }
 
-        return new Cart\Total($calculatedItems);
+        return new Cart\Total($calculatedItems, $calculatedItems);
     }
 }

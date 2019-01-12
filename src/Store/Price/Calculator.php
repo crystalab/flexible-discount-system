@@ -8,8 +8,22 @@ class Calculator
     {
     }
 
-    public function calculateTotal(array $products): Total
+    /**
+     * @param Cart\Item[] $items
+     * @return Cart\Total
+     */
+    public function calculateTotal(array $items): Cart\Total
     {
-        return new Total();
+        $calculatedItems = [];
+
+        foreach ($items as $item) {
+            $calculatedItems[] = new Cart\CalculatedItem(
+                $item->product,
+                $item->amount,
+                $item->product->getPrice() * $item->amount
+            );
+        }
+
+        return new Cart\Total($calculatedItems);
     }
 }

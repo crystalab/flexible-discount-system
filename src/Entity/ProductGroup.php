@@ -42,7 +42,7 @@ class ProductGroup
     }
 
     /** @return ArrayCollection|Product[] */
-    public function getProducts(): ArrayCollection
+    public function getProducts()
     {
         return $this->products;
     }

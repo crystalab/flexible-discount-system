@@ -16,10 +16,18 @@ class Product
     /** @ORM\Column(type="float") */
     private $price;
 
-    public function __construct(string $name, float $price)
+    /**
+     * @var Unit
+     * @ORM\ManyToOne(targetEntity="App\Entity\Unit", fetch="EAGER", cascade={})
+     * @ORM\JoinColumn(name="unit_id", referencedColumnName="id")
+     */
+    private $unit;
+
+    public function __construct(string $name, float $price, Unit $unit)
     {
         $this->name = $name;
         $this->price = $price;
+        $this->unit = $unit;
     }
 
     public function getId(): int
@@ -35,5 +43,10 @@ class Product
     public function getPrice(): float
     {
         return $this->price;
+    }
+
+    public function getUnit(): Unit
+    {
+        return $this->unit;
     }
 }

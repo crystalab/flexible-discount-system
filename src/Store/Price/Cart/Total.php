@@ -4,15 +4,12 @@ namespace App\Store\Price\Cart;
 
 class Total
 {
-    /** @var CalculatedItem[] */
-    public $originalItems;
+    public $preTotal;
+    public $finalTotal;
 
-    /** @var CalculatedItem[] */
-    public $finalItems;
-
-    public function __construct(array $originalItems, array $finalItems)
+    public function __construct(PreTotal $preTotal, FinalTotal $finalTotal)
     {
-        $this->originalItems = $originalItems;
-        $this->finalItems = $finalItems;
+        $this->preTotal = $preTotal;
+        $this->finalTotal = $finalTotal;
     }
 }

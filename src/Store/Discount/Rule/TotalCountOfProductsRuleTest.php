@@ -3,8 +3,8 @@
 namespace App\Store\Discount\Rule;
 
 use App\Store\Discount\Context;
-use App\Store\Price\Cart\CalculatedItem;
-use App\Store\Price\Cart\PreTotal;
+use App\Store\Price\Cart\CartItem;
+use App\Store\Price\Cart\Total;
 use App\Store\Product\Product;
 
 class TotalCountOfProductsRuleTest extends AbstractCountableRuleTest
@@ -16,23 +16,29 @@ class TotalCountOfProductsRuleTest extends AbstractCountableRuleTest
         $ltTwoRule = new TotalCountOfProductsRule(AbstractCountableRule::OPERATOR_LT, 2);
 
         $zeroItemsContext = $this->getContextBuilder()
-            ->withPreTotal(
-                $this->getPreTotalBuilder()->withItems([])->build()
+            ->withCart(
+                $this->getCartBuilder()->withPreTotal(
+                    $this->getTotalBuilder()->withItems([])->build()
+                )->build()
             )
             ->build();
         $oneItemContext = $this->getContextBuilder()
-            ->withPreTotal(
-                $this->getPreTotalBuilder()->withItems([
-                    $this->getCalculatedItemBuilder()->withAmount(1)->build()
-                ])->build()
+            ->withCart(
+                $this->getCartBuilder()->withPreTotal(
+                    $this->getTotalBuilder()->withItems([
+                        $this->getCartItemBuilder()->withAmount(1)->build()
+                    ])->build()
+                )->build()
             )
             ->build();
         $fiveItemContext = $this->getContextBuilder()
-            ->withPreTotal(
-                $this->getPreTotalBuilder()->withItems([
-                    $this->getCalculatedItemBuilder()->withAmount(2)->build(),
-                    $this->getCalculatedItemBuilder()->withAmount(3)->build()
-                ])->build()
+            ->withCart(
+                $this->getCartBuilder()->withPreTotal(
+                    $this->getTotalBuilder()->withItems([
+                        $this->getCartItemBuilder()->withAmount(2)->build(),
+                        $this->getCartItemBuilder()->withAmount(3)->build()
+                    ])->build()
+                )->build()
             )
             ->build();
 

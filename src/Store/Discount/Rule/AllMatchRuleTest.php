@@ -2,9 +2,6 @@
 
 namespace App\Store\Discount\Rule;
 
-use App\Store\Discount\Context;
-use App\Store\Price\Cart\PreTotal;
-
 class AllMatchRuleTest extends AbstractCompoundRuleTest
 {
     /** @var AllMatchRule */
@@ -19,7 +16,7 @@ class AllMatchRuleTest extends AbstractCompoundRuleTest
     /** @test */
     public function matchTimesShouldReturnZeroWhenNoInnerRulesProvided()
     {
-        $actual = $this->instance->matchTimes(new Context([], [], new PreTotal([], 0)));
+        $actual = $this->instance->matchTimes($this->getContextBuilder()->build());
 
         $this->assertSame(0, $actual);
     }
@@ -30,7 +27,7 @@ class AllMatchRuleTest extends AbstractCompoundRuleTest
         $this->instance->getInnerRules()->add($this->createSimpleRuleMock(1));
         $this->instance->getInnerRules()->add($this->createSimpleRuleMock(2));
 
-        $actual = $this->instance->matchTimes(new Context([], [], new PreTotal([], 0)));
+        $actual = $this->instance->matchTimes($this->getContextBuilder()->build());
 
         $this->assertSame(1, $actual);
     }
@@ -41,7 +38,7 @@ class AllMatchRuleTest extends AbstractCompoundRuleTest
         $this->instance->getInnerRules()->add($this->createSimpleRuleMock(0));
         $this->instance->getInnerRules()->add($this->createSimpleRuleMock());
 
-        $actual = $this->instance->matchTimes(new Context([], [], new PreTotal([], 0)));
+        $actual = $this->instance->matchTimes($this->getContextBuilder()->build());
 
         $this->assertSame(0, $actual);
     }

@@ -11,13 +11,25 @@ class TotalOfCartRuleTest extends AbstractCountableRuleTest
         $ltTwoRule = new TotalOfCartRule(AbstractCountableRule::OPERATOR_LT, 2);
 
         $zeroTotalContext = $this->getContextBuilder()
-            ->withPreTotal($this->getPreTotalBuilder()->withTotal(0)->build())
+            ->withCart(
+                $this->getCartBuilder()->withPreTotal(
+                    $this->getTotalBuilder()->withTotal(0)->build()
+                )->build()
+            )
             ->build();
         $oneTotalContext = $this->getContextBuilder()
-            ->withPreTotal($this->getPreTotalBuilder()->withTotal(1)->build())
+            ->withCart(
+                $this->getCartBuilder()->withPreTotal(
+                    $this->getTotalBuilder()->withTotal(1)->build()
+                )->build()
+            )
             ->build();
         $fiveTotalContext = $this->getContextBuilder()
-            ->withPreTotal($this->getPreTotalBuilder()->withTotal(5)->build())
+            ->withCart(
+                $this->getCartBuilder()->withPreTotal(
+                    $this->getTotalBuilder()->withTotal(5)->build()
+                )->build()
+            )
             ->build();
 
         return [

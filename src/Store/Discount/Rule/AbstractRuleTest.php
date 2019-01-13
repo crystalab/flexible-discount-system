@@ -3,8 +3,9 @@
 namespace App\Store\Discount\Rule;
 
 use App\Store\Discount\ContextBuilder;
-use App\Store\Price\Cart\CalculatedItemBuilder;
-use App\Store\Price\Cart\PreTotalBuilder;
+use App\Store\Price\Cart\CartBuilder;
+use App\Store\Price\Cart\CartItemBuilder;
+use App\Store\Price\Cart\TotalBuilder;
 use App\Store\Product\ProductBuilder;
 use App\Store\Product\ProductGroupBuilder;
 use PHPUnit\Framework\TestCase;
@@ -14,11 +15,14 @@ abstract class AbstractRuleTest extends TestCase
     /** @var ContextBuilder */
     private $contextBuilder;
 
-    /** @var PreTotalBuilder */
-    private $preTotalBuilder;
+    /** @var CartBuilder */
+    private $cartBuilder;
 
-    /** @var CalculatedItemBuilder */
-    private $calculatedItemBuilder;
+    /** @var TotalBuilder */
+    private $totalBuilder;
+
+    /** @var CartItemBuilder */
+    private $cartItemBuilder;
 
     /** @var ProductBuilder */
     private $productBuilder;
@@ -35,22 +39,31 @@ abstract class AbstractRuleTest extends TestCase
         return $this->contextBuilder;
     }
 
-    public function getPreTotalBuilder(): PreTotalBuilder
+    public function getCartBuilder(): CartBuilder
     {
-        if ($this->preTotalBuilder === null) {
-            $this->preTotalBuilder = new PreTotalBuilder();
+        if ($this->cartBuilder === null) {
+            $this->cartBuilder = new CartBuilder();
         }
 
-        return $this->preTotalBuilder;
+        return $this->cartBuilder;
     }
 
-    public function getCalculatedItemBuilder(): CalculatedItemBuilder
+    public function getTotalBuilder(): TotalBuilder
     {
-        if ($this->calculatedItemBuilder === null) {
-            $this->calculatedItemBuilder = new CalculatedItemBuilder();
+        if ($this->totalBuilder === null) {
+            $this->totalBuilder = new TotalBuilder();
         }
 
-        return $this->calculatedItemBuilder;
+        return $this->totalBuilder;
+    }
+
+    public function getCartItemBuilder(): CartItemBuilder
+    {
+        if ($this->cartItemBuilder === null) {
+            $this->cartItemBuilder = new CartItemBuilder();
+        }
+
+        return $this->cartItemBuilder;
     }
 
     public function getProductBuilder(): ProductBuilder

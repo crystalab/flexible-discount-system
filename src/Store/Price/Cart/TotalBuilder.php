@@ -2,7 +2,7 @@
 
 namespace App\Store\Price\Cart;
 
-class PreTotalBuilder
+class TotalBuilder
 {
     private $items;
     private $total;
@@ -12,28 +12,28 @@ class PreTotalBuilder
         $this->reset();
     }
 
-    public function reset(): PreTotalBuilder
+    public function reset(): TotalBuilder
     {
         $this->items = [];
         $this->total = 0;
         return $this;
     }
 
-    public function withItems(array $items): PreTotalBuilder
+    public function withItems(array $items): TotalBuilder
     {
         $this->items = $items;
         return $this;
     }
 
-    public function withTotal(float $total): PreTotalBuilder
+    public function withTotal(float $total): TotalBuilder
     {
         $this->total = $total;
         return $this;
     }
 
-    public function build(): PreTotal
+    public function build(): Total
     {
-        return new PreTotal(
+        return new Total(
             $this->items,
             $this->total
         );

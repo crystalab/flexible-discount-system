@@ -2,13 +2,14 @@
 
 namespace App\Store\Discount;
 
-use App\Store\Price\Cart\PreTotal;
+use App\Store\Price\Cart\Cart;
+use App\Store\Price\Cart\Total;
 
 class ContextBuilder
 {
     private $rules;
     private $productIdToGroupsMap;
-    private $preTotal;
+    private $cart;
 
     public function __construct()
     {
@@ -19,7 +20,7 @@ class ContextBuilder
     {
         $this->rules = [];
         $this->productIdToGroupsMap = [];
-        $this->preTotal = new PreTotal([], 0);
+        $this->cart = new Cart(new Total([], 0), [], new Total([], 0));
         return $this;
     }
 
@@ -29,9 +30,9 @@ class ContextBuilder
         return $this;
     }
 
-    public function withPreTotal(PreTotal $preTotal): ContextBuilder
+    public function withCart(Cart $cart): ContextBuilder
     {
-        $this->preTotal = $preTotal;
+        $this->cart = $cart;
         return $this;
     }
 
@@ -40,7 +41,7 @@ class ContextBuilder
         return new Context(
             $this->rules,
             $this->productIdToGroupsMap,
-            $this->preTotal
+            $this->cart
         );
     }
 }

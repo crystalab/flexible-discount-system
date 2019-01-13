@@ -33,7 +33,7 @@ class CalculatorTest extends TestCase
     {
         $result = $this->instance->calculateTotal([]);
 
-        $this->assertInstanceOf(Cart\Total::class, $result);
+        $this->assertInstanceOf(Cart\Cart::class, $result);
     }
 
     /** @test */

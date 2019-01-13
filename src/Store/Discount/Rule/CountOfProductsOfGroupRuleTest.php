@@ -3,8 +3,9 @@
 namespace App\Store\Discount\Rule;
 
 use App\Store\Discount\Context;
-use App\Store\Price\Cart\CalculatedItem;
-use App\Store\Price\Cart\PreTotal;
+use App\Store\Price\Cart\Cart;
+use App\Store\Price\Cart\CartItem;
+use App\Store\Price\Cart\Total;
 use App\Store\Product\Product;
 
 class CountOfProductsOfGroupRuleTest extends AbstractCountableRuleTest
@@ -24,10 +25,12 @@ class CountOfProductsOfGroupRuleTest extends AbstractCountableRuleTest
             ->withProductIdToGroupsMap([
                 1 => [$productGroupWithIdOne]
             ])
-            ->withPreTotal(
-                $this->getPreTotalBuilder()->withItems([
-                    $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
-                ])->build()
+            ->withCart(
+                $this->getCartBuilder()->withPreTotal(
+                    $this->getTotalBuilder()->withItems([
+                        $this->getCartItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
+                    ])->build()
+                )->build()
             )
             ->build();
         $oneItemContext = $this->getContextBuilder()
@@ -35,9 +38,9 @@ class CountOfProductsOfGroupRuleTest extends AbstractCountableRuleTest
                 1 => [$productGroupWithIdOne]
             ])
             ->withPreTotal(
-                $this->getPreTotalBuilder()->withItems([
-                    $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdOne)->build(),
-                    $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
+                $this->getTotalBuilder()->withItems([
+                    $this->getCartItemBuilder()->withAmount(1)->withProduct($productWithIdOne)->build(),
+                    $this->getCartItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
                 ])->build()
             )
             ->build();
@@ -47,9 +50,9 @@ class CountOfProductsOfGroupRuleTest extends AbstractCountableRuleTest
                 2 => [$productGroupWithIdOne],
             ])
             ->withPreTotal(
-                $this->getPreTotalBuilder()->withItems([
-                    $this->getCalculatedItemBuilder()->withAmount(4)->withProduct($productWithIdOne)->build(),
-                    $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
+                $this->getTotalBuilder()->withItems([
+                    $this->getCartItemBuilder()->withAmount(4)->withProduct($productWithIdOne)->build(),
+                    $this->getCartItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
                 ])->build()
             )
             ->build();

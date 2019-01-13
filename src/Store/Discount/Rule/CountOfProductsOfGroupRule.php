@@ -3,7 +3,7 @@
 namespace App\Store\Discount\Rule;
 
 use App\Store\Discount\Context;
-use App\Store\Price\Cart\CalculatedItem;
+use App\Store\Price\Cart\CartItem;
 use App\Store\Product\ProductGroup;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,7 +24,7 @@ class CountOfProductsOfGroupRule extends AbstractCountableRule
 
     protected function extractCountFromContext(Context $context): float
     {
-        return array_reduce($context->preTotal->items, function (int $carry, CalculatedItem $item) use ($context) {
+        return array_reduce($context->cart->preTotal->items, function (int $carry, CartItem $item) use ($context) {
             if (!empty($context->productIdToGroupsMap[$item->product->getId()])) {
                 /** @var ProductGroup $productGroup */
                 foreach ($context->productIdToGroupsMap[$item->product->getId()] as $productGroup) {

@@ -10,20 +10,20 @@ class Calculator
 
     /**
      * @param Cart\Item[] $items
-     * @return Cart\Total
+     * @return Cart\Cart
      */
-    public function calculateTotal(array $items): Cart\Total
+    public function calculateTotal(array $items): Cart\Cart
     {
         $calculatedItems = [];
 
         foreach ($items as $item) {
-            $calculatedItems[] = new Cart\CalculatedItem(
+            $calculatedItems[] = new Cart\CartItem(
                 $item->product,
                 $item->amount,
                 $item->product->getPrice() * $item->amount
             );
         }
 
-        return new Cart\Total($calculatedItems, $calculatedItems);
+        return new Cart\Cart($calculatedItems, [], $calculatedItems);
     }
 }

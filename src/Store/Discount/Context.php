@@ -3,7 +3,7 @@
 namespace App\Store\Discount;
 
 use App\Store\Discount\Rule\AbstractRule;
-use App\Store\Price\Cart\PreTotal;
+use App\Store\Price\Cart\Cart;
 use App\Store\Product\ProductGroup;
 
 class Context
@@ -12,12 +12,12 @@ class Context
     public $rules;
     /** @var ProductGroup[][] */
     public $productIdToGroupsMap;
-    public $preTotal;
+    public $cart;
 
-    public function __construct(array $rules, array $productIdToGroupsMap, PreTotal $preTotal)
+    public function __construct(array $rules, array $productIdToGroupsMap, Cart $cart)
     {
         $this->rules = $rules;
         $this->productIdToGroupsMap = $productIdToGroupsMap;
-        $this->preTotal = $preTotal;
+        $this->cart = $cart;
     }
 }

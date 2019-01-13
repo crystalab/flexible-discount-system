@@ -4,7 +4,7 @@ namespace App\Store\Price\Cart;
 
 use App\Store\Product\Product;
 
-class CalculatedItem extends Item
+class CartItem extends Item
 {
     public $totalPrice;
 

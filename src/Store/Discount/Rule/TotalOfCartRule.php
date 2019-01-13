@@ -10,6 +10,6 @@ class TotalOfCartRule extends AbstractCountableRule
 {
     protected function extractCountFromContext(Context $context): float
     {
-        return $context->preTotal->total;
+        return $context->cart->preTotal->total;
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Store\Discount\Rule;
 
 use App\Store\Discount\Context;
-use App\Store\Price\Cart\CalculatedItem;
-use App\Store\Price\Cart\PreTotal;
+use App\Store\Price\Cart\CartItem;
+use App\Store\Price\Cart\Total;
 use App\Store\Product\Product;
 
 class CountOfProductsRuleTest extends AbstractCountableRuleTest
@@ -19,26 +19,32 @@ class CountOfProductsRuleTest extends AbstractCountableRuleTest
         $ltTwoRule = new CountOfProductsRule(AbstractCountableRule::OPERATOR_LT, 2, $productWithIdOne);
 
         $zeroItemsContext = $this->getContextBuilder()
-            ->withPreTotal(
-                $this->getPreTotalBuilder()->withItems([
-                    $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
-                ])->build()
+            ->withCart(
+                $this->getCartBuilder()->withPreTotal(
+                    $this->getTotalBuilder()->withItems([
+                        $this->getCartItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
+                    ])->build()
+                )->build()
             )
             ->build();
         $oneItemContext = $this->getContextBuilder()
-            ->withPreTotal(
-                $this->getPreTotalBuilder()->withItems([
-                    $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdOne)->build(),
-                    $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
-                ])->build()
+            ->withCart(
+                $this->getCartBuilder()->withPreTotal(
+                    $this->getTotalBuilder()->withItems([
+                        $this->getCartItemBuilder()->withAmount(1)->withProduct($productWithIdOne)->build(),
+                        $this->getCartItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
+                    ])->build()
+                )->build()
             )
             ->build();
         $fiveItemContext = $this->getContextBuilder()
-            ->withPreTotal(
-                $this->getPreTotalBuilder()->withItems([
-                    $this->getCalculatedItemBuilder()->withAmount(5)->withProduct($productWithIdOne)->build(),
-                    $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
-                ])->build()
+            ->withCart(
+                $this->getCartBuilder()->withPreTotal(
+                    $this->getTotalBuilder()->withItems([
+                        $this->getCartItemBuilder()->withAmount(5)->withProduct($productWithIdOne)->build(),
+                        $this->getCartItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
+                    ])->build()
+                )->build()
             )
             ->build();
 

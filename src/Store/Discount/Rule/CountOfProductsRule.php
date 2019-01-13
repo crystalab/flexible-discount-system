@@ -23,7 +23,7 @@ class CountOfProductsRule extends AbstractCountableRule
 
     protected function extractCountFromContext(Context $context): float
     {
-        foreach ($context->preTotal->items as $item) {
+        foreach ($context->cart->preTotal->items as $item) {
             if ($item->product->getId() === $this->product->getId()) {
                 return $item->amount;
             }

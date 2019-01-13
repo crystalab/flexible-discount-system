@@ -21,6 +21,9 @@ class CountOfProductsOfGroupRuleTest extends AbstractCountableRuleTest
         $ltTwoRule = new CountOfProductsOfGroupRule(AbstractCountableRule::OPERATOR_LT, 2, $productGroupWithIdOne);
 
         $zeroItemsContext = $this->getContextBuilder()
+            ->withProductIdToGroupsMap([
+                1 => [$productGroupWithIdOne]
+            ])
             ->withPreTotal(
                 $this->getPreTotalBuilder()->withItems([
                     $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
@@ -28,6 +31,9 @@ class CountOfProductsOfGroupRuleTest extends AbstractCountableRuleTest
             )
             ->build();
         $oneItemContext = $this->getContextBuilder()
+            ->withProductIdToGroupsMap([
+                1 => [$productGroupWithIdOne]
+            ])
             ->withPreTotal(
                 $this->getPreTotalBuilder()->withItems([
                     $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdOne)->build(),
@@ -36,14 +42,17 @@ class CountOfProductsOfGroupRuleTest extends AbstractCountableRuleTest
             )
             ->build();
         $fiveItemContext = $this->getContextBuilder()
+            ->withProductIdToGroupsMap([
+                1 => [$productGroupWithIdOne],
+                2 => [$productGroupWithIdOne],
+            ])
             ->withPreTotal(
                 $this->getPreTotalBuilder()->withItems([
-                    $this->getCalculatedItemBuilder()->withAmount(5)->withProduct($productWithIdOne)->build(),
+                    $this->getCalculatedItemBuilder()->withAmount(4)->withProduct($productWithIdOne)->build(),
                     $this->getCalculatedItemBuilder()->withAmount(1)->withProduct($productWithIdTwo)->build()
                 ])->build()
             )
             ->build();
-
 
         return [
             'positive: 0 eq 0 = 1'  => [$zeroItemsContext, $eqZeroRule, 1],

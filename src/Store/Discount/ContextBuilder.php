@@ -23,6 +23,12 @@ class ContextBuilder
         return $this;
     }
 
+    public function withProductIdToGroupsMap(array $productIdToGroupsMap): ContextBuilder
+    {
+        $this->productIdToGroupsMap = $productIdToGroupsMap;
+        return $this;
+    }
+
     public function withPreTotal(PreTotal $preTotal): ContextBuilder
     {
         $this->preTotal = $preTotal;

@@ -27,9 +27,21 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Store/Product'
                 prefix: 'App\Store\Product'
                 alias: StoreProduct
+            StoreDiscount:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Store/Discount'
+                prefix: 'App\Store\Discount'
+                alias: StoreDiscount
             StoreDiscountRule:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/src/Store/Discount/Rule'
                 prefix: 'App\Store\Discount\Rule'
                 alias: StoreDiscountRule
+            StoreDiscountBenefit:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Store/Discount/Benefit'
+                prefix: 'App\Store\Discount\Benefit'
+                alias: StoreDiscountBenefit

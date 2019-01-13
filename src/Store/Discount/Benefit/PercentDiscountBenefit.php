@@ -3,6 +3,7 @@
 namespace App\Store\Discount\Benefit;
 
 use App\Store\Discount\Context;
+use Doctrine\ORM\Mapping as ORM;
 
 /** @ORM\Entity */
 class PercentDiscountBenefit extends AbstractBenefit

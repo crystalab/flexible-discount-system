@@ -7,7 +7,6 @@ use App\Store\Price\Cart\Total;
 
 class ContextBuilder
 {
-    private $rules;
     private $productIdToGroupsMap;
     private $cart;
 
@@ -18,7 +17,6 @@ class ContextBuilder
 
     public function reset(): ContextBuilder
     {
-        $this->rules = [];
         $this->productIdToGroupsMap = [];
         $this->cart = new Cart(new Total([], 0), [], new Total([], 0));
         return $this;
@@ -39,7 +37,6 @@ class ContextBuilder
     public function build(): Context
     {
         return new Context(
-            $this->rules,
             $this->productIdToGroupsMap,
             $this->cart
         );

@@ -2,16 +2,22 @@
 
 namespace App\Store\Discount\Rule;
 
+use App\Store\Discount\Context;
+
 class AnyMatchRule extends AbstractCompoundRule
 {
-    public function match(Context $context): bool
+    public function matchTimes(Context $context): int
     {
-        foreach ($this->getInnerRules() as $innerRule) {
-            if ($innerRule->match($context)) {
-                return true;
-            }
+        if ($this->getInnerRules()->isEmpty()) {
+            return 1;
         }
 
-        return false;
+        $results = [];
+
+        foreach ($this->getInnerRules() as $innerRule) {
+            $results[] = $innerRule->matchTimes($context);
+        }
+
+        return max($results);
     }
 }
